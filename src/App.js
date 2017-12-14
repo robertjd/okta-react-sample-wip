@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
 import Home from './Home';
+import Messages from './Messages';
 import Profile from './Profile';
 
 const config = {
@@ -15,11 +16,12 @@ class App extends Component {
     return (
       <Router>
         <Security issuer={config.issuer}
-                  client_id={config.client_id}
-                  redirect_uri={config.redirect_uri}
+          client_id={config.client_id}
+          redirect_uri={config.redirect_uri}
         >
           <Route path='/' exact={true} component={Home}/>
           <Route path='/implicit/callback' component={ImplicitCallback}/>
+          <SecureRoute path='/messages' component={Messages}/>
           <SecureRoute path='/profile' component={Profile}/>
         </Security>
       </Router>
